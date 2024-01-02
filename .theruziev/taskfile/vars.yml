@@ -1,0 +1,12 @@
+version: "3"
+
+vars:
+  GIT_COMMIT:
+    sh: git log -n 1 --format=%h
+  GIT_TAG:
+    sh: git describe --tags --abbrev=0 2>/dev/null || echo "dev"
+  GIT_BRANCH:
+    sh: git branch --show-current
+  LD_FLAGS: >-
+    -X '{{.PACKAGE_PREFIX}}/internal/pkg/git.Version={{.GIT_TAG}}'
+    -X '{{.PACKAGE_PREFIX}}/internal/pkg/git.Commit={{.GIT_COMMIT}}'

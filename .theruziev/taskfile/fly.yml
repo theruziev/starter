@@ -1,0 +1,9 @@
+version: '3'
+
+includes:
+  vars: vars.yml
+
+tasks:
+  deploy:
+    cmds:
+      - fly deploy --build-arg=PACKAGE_PREFIX={{.PACKAGE_PREFIX}} --build-arg=GIT_TAG={{.GIT_TAG}} --build-arg=GIT_COMMIT={{.GIT_COMMIT}}
