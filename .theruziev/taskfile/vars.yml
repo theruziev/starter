@@ -1,0 +1,6 @@
+version: "3"
+
+vars:
+  LD_FLAGS: >-
+    -X '{{.PACKAGE_PREFIX}}/internal/pkg/git.Version={{.GIT_TAG}}'
+    -X '{{.PACKAGE_PREFIX}}/internal/pkg/git.Commit={{.GIT_COMMIT}}'

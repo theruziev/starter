@@ -1,0 +1,17 @@
+version: '3'
+
+includes:
+  vars: vars.yml
+
+tasks:
+  build:
+    cmds:
+      - go build -o {{.BIN_PATH}}/app -ldflags="{{.LD_FLAGS}}" main.go
+
+  test:
+    cmds:
+      - go test -race ./...
+
+  lint:
+    cmds:
+      - golangci-lint run --config=.golangci.yml ./...

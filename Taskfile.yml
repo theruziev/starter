@@ -1,0 +1,20 @@
+version: '3'
+vars:
+  PACKAGE_PREFIX: github.com/theruziev/starter
+  DOCKER_IMAGE_NAME: theruziev/starter
+  BIN_PATH: .bin
+
+includes:
+  project: .theruziev/taskfile/project.yml
+  docker: .theruziev/taskfile/docker.yml
+
+tasks:
+  lint:
+    cmds:
+      - task: project:lint
+  build:
+    cmds:
+      - task: project:build
+  test:
+    cmds:
+      - task: project:test
