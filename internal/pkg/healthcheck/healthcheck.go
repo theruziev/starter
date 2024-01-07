@@ -9,7 +9,6 @@ import (
 
 func NewHealthCheck() *health.Server {
 	healthcheck := health.NewServer()
-	healthcheck.SetServingStatus("", grpc_health_v1.HealthCheckResponse_SERVING)
 	return healthcheck
 }
 

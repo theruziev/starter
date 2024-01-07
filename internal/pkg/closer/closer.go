@@ -58,12 +58,12 @@ func (c *Closer) Close(ctx context.Context) error {
 	}()
 
 	var resultErr []error
-	for i := range c.closers {
+	for i := len(c.closers) - 1; i >= 0; i-- {
 		fn := c.closers[i]
 		if err := fn(ctx); err != nil {
 			resultErr = append(resultErr, err)
 		}
 	}
-
+	
 	return errors.Join(resultErr...)
 }

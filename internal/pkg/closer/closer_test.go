@@ -69,8 +69,8 @@ func TestCloseOrderAndErrorHandling(t *testing.T) {
 	require.ErrorContains(t, err, "error 1")
 
 	// Check order of execution
-	require.Equal(t, 1, order[0])
-	require.Equal(t, 2, order[1])
+	require.Equal(t, 2, order[0])
+	require.Equal(t, 1, order[1])
 
 }
 

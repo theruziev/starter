@@ -39,15 +39,8 @@ func (s *Server) Init(ctx context.Context) error {
 	return nil
 }
 
-func (s *Server) initHealthCheck(ctx context.Context) {
-	logger := logx.FromContext(ctx)
-
+func (s *Server) initHealthCheck(_ context.Context) {
 	h := healthcheck.NewHealthCheck()
-	s.closer.Add(func(ctx context.Context) error {
-		logger.Infof("healthcheck is shutting down")
-		h.SetServingStatus("", grpc_health_v1.HealthCheckResponse_NOT_SERVING)
-		return nil
-	})
 
 	s.healthcheck = h
 }
@@ -78,6 +71,13 @@ func (s *Server) Run(ctx context.Context) error {
 			return fmt.Errorf("failed to shutdown server: %w", err)
 		}
 
+		return nil
+	})
+
+	s.healthcheck.SetServingStatus("", grpc_health_v1.HealthCheckResponse_SERVING)
+	s.closer.Add(func(ctx context.Context) error {
+		logger.Infof("healthcheck is shutting down")
+		s.healthcheck.SetServingStatus("", grpc_health_v1.HealthCheckResponse_NOT_SERVING)
 		return nil
 	})
 
