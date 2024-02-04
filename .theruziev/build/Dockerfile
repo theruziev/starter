@@ -4,6 +4,9 @@ ARG PACKAGE_PREFIX=""
 ARG GIT_TAG="dev"
 ARG GIT_COMMIT=""
 
+RUN apk update && apk upgrade && apk add --no-cache ca-certificates tzdata
+RUN update-ca-certificates
+
 
 WORKDIR /app
 
@@ -22,6 +25,8 @@ RUN go build -o app -ldflags="\
 FROM scratch
 
 COPY --from=builder /app/app .
+COPY --from=builder /etc/ssl /etc/ssl/
+COPY --from=builder /usr/share/zoneinfo /usr/share/zoneinfo
 
 # import curl from current repository image
 COPY --from=ghcr.io/tarampampam/curl:8.0.1 /bin/curl /bin/curl
