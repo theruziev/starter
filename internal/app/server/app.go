@@ -8,8 +8,8 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/theruziev/starter/internal/pkg/closer"
-	"github.com/theruziev/starter/internal/pkg/git"
 	"github.com/theruziev/starter/internal/pkg/healthcheck"
+	"github.com/theruziev/starter/internal/pkg/info"
 	"github.com/theruziev/starter/internal/pkg/logx"
 	"google.golang.org/grpc/health"
 	"google.golang.org/grpc/health/grpc_health_v1"
@@ -53,7 +53,7 @@ func (s *Server) initRouter(_ context.Context) {
 	})
 	r.Get("/live", healthcheck.NewLivenessHandler())
 	r.Get("/ready", healthcheck.NewReadinessHandler(s.healthcheck))
-	r.Get("/version", git.Handler())
+	r.Get("/version", info.Handler())
 	s.r = r
 }
 

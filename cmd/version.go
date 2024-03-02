@@ -4,13 +4,13 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/theruziev/starter/internal/pkg/git"
+	"github.com/theruziev/starter/internal/pkg/info"
 )
 
 type versionCli struct{}
 
 func (v *versionCli) Run(_ *contextCli) error {
-	resultJSON, err := json.Marshal(git.Information())
+	resultJSON, err := json.Marshal(info.Information())
 	if err != nil {
 		panic(err)
 	}

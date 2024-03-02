@@ -1,4 +1,4 @@
-package git
+package info
 
 import (
 	"encoding/json"
@@ -20,8 +20,9 @@ func Handler() http.HandlerFunc {
 		info := Information()
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
-		jsonBytes, _ := json.Marshal(info)
-		_, _ = w.Write(jsonBytes)
-
+		if err := json.NewEncoder(w).Encode(info); err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
 	}
 }
