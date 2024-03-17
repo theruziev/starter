@@ -18,8 +18,8 @@ RUN go mod download
 COPY . /app/
 
 RUN go build -o app -ldflags="\
-    -X '$PACKAGE_PREFIX/internal/pkg/git.Version=$GIT_TAG' \
-    -X '$PACKAGE_PREFIX/internal/pkg/git.Commit=$GIT_COMMIT'" \
+    -X '$PACKAGE_PREFIX/internal/pkg/info.Version=$GIT_TAG' \
+    -X '$PACKAGE_PREFIX/internal/pkg/info.Commit=$GIT_COMMIT'" \
     main.go
 
 FROM scratch
