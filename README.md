@@ -21,7 +21,7 @@ It has a basic structure and configuration for the project I usually use.
 │   └── pkg - internal packages
 │       ├── closer - closer package provide a way to close multiple resources
 │       ├── logx - logx package provide a way to log messages
-│       ├── git - git package provide a information about version and git commit
+│       ├── info - info package provide a information about version and git commit
 │       └── healthcheck - healthcheck package provide a healthcheck functionality
 ├── pkg - public packages
 ├── .theruziev - project related files (e.g. Docker, taskfile.yml, etc.)
