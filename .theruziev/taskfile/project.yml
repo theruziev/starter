@@ -19,3 +19,9 @@ tasks:
   lint:
     cmds:
       - golangci-lint run --config=.golangci.yml ./...
+
+
+  checkpoint:
+    cmds:
+      - git add .
+      - git commit -a -m "checkpoint $(date +'%Y-%m-%d %H:%M:%S')"

@@ -23,3 +23,6 @@ tasks:
       - task: project:lint
       - task: project:test
       - task: fly:deploy
+  checkpoint:
+    cmds:
+      - task: project:checkpoint
