@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"sync"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/theruziev/starter/internal/pkg/closer"
@@ -20,6 +21,8 @@ type Server struct {
 	closer      *closer.Closer
 	r           chi.Router
 	healthcheck *health.Server
+
+	routerOnce sync.Once
 }
 
 type Options struct {
@@ -46,15 +49,17 @@ func (s *Server) initHealthCheck(_ context.Context) {
 }
 
 func (s *Server) initRouter(_ context.Context) {
-	r := chi.NewRouter()
-	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
-		w.WriteHeader(http.StatusOK)
-		_, _ = w.Write([]byte("Hello world!"))
+	s.routerOnce.Do(func() {
+		r := chi.NewRouter()
+		r.Get("/", func(w http.ResponseWriter, r *http.Request) {
+			w.WriteHeader(http.StatusOK)
+			_, _ = w.Write([]byte("Hello world!"))
+		})
+		r.Get("/live", healthcheck.NewLivenessHandler())
+		r.Get("/ready", healthcheck.NewReadinessHandler(s.healthcheck))
+		r.Get("/version", info.Handler())
+		s.r = r
 	})
-	r.Get("/live", healthcheck.NewLivenessHandler())
-	r.Get("/ready", healthcheck.NewReadinessHandler(s.healthcheck))
-	r.Get("/version", info.Handler())
-	s.r = r
 }
 
 func (s *Server) Run(ctx context.Context) error {
