@@ -9,7 +9,7 @@ import (
 )
 
 func TestNewLivenessHandler(t *testing.T) {
-	req, err := http.NewRequest("GET", "/live", nil)
+	req, err := http.NewRequest("GET", "/live", http.NoBody)
 	require.NoError(t, err)
 
 	rr := httptest.NewRecorder()
@@ -23,7 +23,7 @@ func TestNewLivenessHandler(t *testing.T) {
 func TestNewReadinessHandler(t *testing.T) {
 	t.Run("not serving", func(t *testing.T) {
 		healthcheck := NewHealthCheck()
-		req, err := http.NewRequest("GET", "/ready", nil)
+		req, err := http.NewRequest("GET", "/ready", http.NoBody)
 		require.NoError(t, err)
 
 		healthcheck.Shutdown()
@@ -36,7 +36,7 @@ func TestNewReadinessHandler(t *testing.T) {
 
 	t.Run("serving", func(t *testing.T) {
 		healthcheck := NewHealthCheck()
-		req, err := http.NewRequest("GET", "/ready", nil)
+		req, err := http.NewRequest("GET", "/ready", http.NoBody)
 		require.NoError(t, err)
 
 		healthcheck.Resume()
