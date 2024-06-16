@@ -1,13 +1,13 @@
 run:
   timeout: 5m
-  skip-dirs:
+  exclude-dirs:
     - vendor
 
 linters-settings:
   govet:
-    check-shadowing: true
-  maligned:
-    suggest-new: true
+    disable-all: true
+    enable:
+      - shadow
   goconst:
     min-len: 2
     min-occurrences: 2
