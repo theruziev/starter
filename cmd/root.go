@@ -14,7 +14,7 @@ type contextCli struct {
 	LogLevel string
 }
 
-var root struct {
+type rootCli struct {
 	IsDebug  bool   `help:"Enable Debug mode" env:"DEBUG"`
 	LogLevel string `help:"Log level" default:"debug" env:"LOG_LEVEL" enum:"debug,info,warn,error"`
 
@@ -28,13 +28,13 @@ func Init() {
 		if !errors.Is(err, os.ErrNotExist) {
 			log.Fatalf("failed to read env: %s", err)
 		}
-
 	}
-	rootCmd := &root
-	ctx := kong.Parse(rootCmd)
+
+	rootCliApp := &rootCli{}
+	ctx := kong.Parse(rootCliApp)
 
 	ctx.FatalIfErrorf(ctx.Run(&contextCli{
-		IsDebug:  rootCmd.IsDebug,
-		LogLevel: rootCmd.LogLevel,
+		IsDebug:  rootCliApp.IsDebug,
+		LogLevel: rootCliApp.LogLevel,
 	}))
 }
