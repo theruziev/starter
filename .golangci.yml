@@ -1,7 +1,5 @@
 run:
   timeout: 5m
-  exclude-dirs:
-    - vendor
 
 linters-settings:
   govet:
@@ -32,11 +30,12 @@ linters-settings:
 linters:
   enable:
     - bodyclose
-    - megacheck
+    - staticcheck
+    - gosimple
     - revive
     - govet
     - unconvert
-    - gas
+    - copyloopvar
     - gocyclo
     - dupl
     - misspell
@@ -46,7 +45,6 @@ linters:
     - ineffassign
     - stylecheck
     - gochecknoinits
-    - exportloopref
     - gocritic
     - nakedret
     - gosimple

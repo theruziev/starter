@@ -22,7 +22,7 @@ type rootCli struct {
 	Server  serverCli  `cmd:""`
 }
 
-func Init() {
+func Run() {
 	err := godotenv.Load()
 	if err != nil {
 		if !errors.Is(err, os.ErrNotExist) {
