@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"os/signal"
+	"syscall"
 	"time"
 
 	"github.com/theruziev/starter/internal/app/server"
@@ -19,17 +20,16 @@ type serverCli struct {
 func (s *serverCli) Run(cliCtx *contextCli) error {
 	logger := logx.NewLogger(cliCtx.LogLevel, cliCtx.IsDebug)
 	ctx := logx.WithLogger(context.Background(), logger)
-	ctx, cancel := signal.NotifyContext(ctx, os.Interrupt, os.Kill)
+	ctx, cancel := signal.NotifyContext(ctx, os.Interrupt, syscall.SIGTERM)
 	defer cancel()
 
 	cl := closer.NewCloser()
 	go func() {
 		<-ctx.Done()
-		logger.Warnf("graceful shutdown")
+		logger.Warn("graceful shutdown initiated")
 		closeCtx, closeCancel := context.WithTimeout(context.Background(), 10*time.Second)
 		defer closeCancel()
-		err := cl.Close(closeCtx)
-		if err != nil {
+		if err := cl.Close(closeCtx); err != nil {
 			logger.Errorf("failed to close server: %s", err)
 		}
 	}()

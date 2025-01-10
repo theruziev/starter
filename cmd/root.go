@@ -24,10 +24,8 @@ type rootCli struct {
 
 func Run() {
 	err := godotenv.Load()
-	if err != nil {
-		if !errors.Is(err, os.ErrNotExist) {
-			log.Fatalf("failed to read env: %s", err)
-		}
+	if err != nil && !errors.Is(err, os.ErrNotExist) {
+		log.Fatalf("failed to read env: %s", err)
 	}
 
 	rootCliApp := &rootCli{}
