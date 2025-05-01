@@ -83,3 +83,6 @@ I use fly.io for deployment.
 - [Version](https://theruziev-starter.fly.dev/version)
 - [Readiness probe](https://theruziev-starter.fly.dev/ready)
 - [Liveness probe](https://theruziev-starter.fly.dev/live)
+
+## AI Assistant Conventions
+This project includes conventions and guidelines for AI assistants. See [CONVENTIONS.md](CONVENTIONS.md) for details.
