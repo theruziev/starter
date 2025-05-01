@@ -1,8 +1,46 @@
 # Starter 
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/theruziev/starter)](https://goreportcard.com/report/github.com/theruziev/starter)
+[![Go Version](https://img.shields.io/github/go-mod/go-version/theruziev/starter)](https://github.com/theruziev/starter)
+[![License](https://img.shields.io/github/license/theruziev/starter)](https://github.com/theruziev/starter/blob/main/LICENSE)
+
 ## Description
-Starter - project template for my own projects.
-It has a basic structure and configuration for the project I usually use.
+Starter is a robust project template for Go applications. It provides a solid foundation with essential components like command-line interface, HTTP server, logging, health checks, and version information.
+
+This template follows Go best practices and has a clean, modular structure that makes it easy to extend and maintain.
+
+## Features
+- Clean architecture with clear separation of concerns
+- Command-line interface with environment variable support
+- HTTP server with health checks and graceful shutdown
+- Structured logging with context propagation
+- Task-based build system
+- Multi-stage Docker build with minimal final image
+- Ready-to-use fly.io deployment configuration
+
+## Getting Started
+
+### Prerequisites
+- Go 1.18 or higher
+- [go-task](https://taskfile.dev/) for running tasks
+
+### Installation
+1. Clone the repository
+   ```bash
+   git clone https://github.com/yourusername/your-project.git
+   cd your-project
+   ```
+
+2. Update the module name
+   ```bash
+   # Edit go.mod to change the module name
+   # Update PACKAGE_PREFIX in Taskfile.yml
+   ```
+
+3. Install dependencies
+   ```bash
+   go mod tidy
+   ```
 
 ## Dependencies
 - [go-task](https://taskfile.dev/) - A task runner / simpler Make alternative written in Go
@@ -45,5 +83,3 @@ I use fly.io for deployment.
 - [Version](https://theruziev-starter.fly.dev/version)
 - [Readiness probe](https://theruziev-starter.fly.dev/ready)
 - [Liveness probe](https://theruziev-starter.fly.dev/live)
-
-
