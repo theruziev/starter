@@ -12,8 +12,9 @@ type versionCli struct{}
 func (v *versionCli) Run(_ *contextCli) error {
 	resultJSON, err := json.Marshal(info.Information())
 	if err != nil {
-		panic(err)
+		return fmt.Errorf("failed to marshal version information: %w", err)
 	}
 	fmt.Println(string(resultJSON))
+
 	return nil
 }
