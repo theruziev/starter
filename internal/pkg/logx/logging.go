@@ -41,6 +41,7 @@ func DefaultLogger() *zap.SugaredLogger {
 	defaultLoggerOnce.Do(func() {
 		defaultLogger = NewLogger(zap.DebugLevel.String(), true)
 	})
+
 	return defaultLogger
 }
 
