@@ -64,6 +64,6 @@ func (c *Closer) Close(ctx context.Context) error {
 			resultErr = append(resultErr, err)
 		}
 	}
-	
+
 	return errors.Join(resultErr...)
 }
