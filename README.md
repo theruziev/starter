@@ -68,8 +68,6 @@ This template follows Go best practices and has a clean, modular structure that 
 
 ## Usage 
 ```bash
-# Run build
-task build
 # Run tests
 task test
 # Run linter
