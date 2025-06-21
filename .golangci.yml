@@ -18,6 +18,7 @@ linters:
     - unconvert
     - unparam
     - unused
+    - nlreturn
   settings:
     goconst:
       min-len: 2
@@ -43,6 +44,8 @@ linters:
       checks:
         - -ST1003
         - all
+    nlreturn:
+      block-size: 2
   exclusions:
     generated: lax
     rules:

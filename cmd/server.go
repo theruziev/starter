@@ -47,5 +47,6 @@ func (s *serverCli) Run(cliCtx *contextCli) error {
 	}
 
 	<-cl.Done()
+
 	return nil
 }

@@ -23,5 +23,6 @@ func FromContext(ctx context.Context) *zap.SugaredLogger {
 	if logger, ok := ctx.Value(loggerKey).(*zap.SugaredLogger); ok {
 		return logger
 	}
+
 	return DefaultLogger()
 }

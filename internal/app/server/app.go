@@ -40,6 +40,7 @@ func NewServer(cl *closer.Closer, opt *Options) *Server {
 func (s *Server) Init(ctx context.Context) error {
 	s.initHealthCheck(ctx)
 	s.initRouter(ctx)
+
 	return nil
 }
 
@@ -84,11 +85,13 @@ func (s *Server) Run(ctx context.Context) error {
 	s.closer.Add(func(ctx context.Context) error {
 		logger.Infof("healthcheck is shutting down")
 		s.healthcheck.SetServingStatus("", grpc_health_v1.HealthCheckResponse_NOT_SERVING)
+
 		return nil
 	})
 
 	if err := srv.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
 		return fmt.Errorf("failed to listen and serve: %w", err)
 	}
+
 	return nil
 }
